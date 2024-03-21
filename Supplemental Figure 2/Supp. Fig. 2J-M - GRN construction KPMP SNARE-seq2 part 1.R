@@ -9,6 +9,7 @@ library(EnsDb.Hsapiens.v86)
 library(dplyr)
 library(tidyverse)
 library(MOJITOO)
+set.seed(777)
 
 
 # define input and output directory
@@ -106,3 +107,42 @@ DimPlot(obj,
         reduction = "MOJITOO_UMAP")
 
 saveRDS(obj, paste0(outdir, 'combined_fibroblast_object_MOJITOO.rds'))
+
+
+
+# PART 3: VISUALIZE FULL SNARE-SEQ2 DATA SET
+# reload data
+RNA = readRDS(paste0(indir, 'GSE183273_Kidney_Healthy-Injury_Cell_Atlas_SNARE2-RNA_Counts_03282022.RDS'))
+meta = read.delim(paste0(indir, 'GSE183273_Kidney_Healthy-Injury_Cell_Atlas_SNARE2-RNA-AC_Metadata_03282022.txt'))
+
+# preprocess the snRNA-seq data
+obj = CreateSeuratObject(counts = RNA,
+                         assay = 'RNA',
+                         meta.data = meta)
+
+# normalization and PCA of snRNA-seq data
+obj = obj %>%
+  NormalizeData() %>%
+  FindVariableFeatures(nfeatures = 3000) %>%
+  ScaleData() %>%
+  RunPCA(npcs = 50)
+
+# run harmony
+obj = RunHarmony(obj,
+                 group.by.vars = c('patient', 'library'),
+                 reduction.use = 'pca')
+
+# perform clustering
+obj = FindNeighbors(obj, dims = 1:20, reduction = 'harmony')
+obj = FindClusters(obj, resolution = 0.5)
+obj = RunUMAP(obj, dims = 1:20, reduction = 'harmony')
+
+# plot UMAP
+Idents(obj) = 'subclass.l1'
+
+pdf(paste0(outdir, 'KPMP_SNARE_seq2_full_data_set_subclass_l1_UMAP_projection.pdf'), width = 8, height = 7)
+DimPlot(obj, raster = FALSE) +
+  theme_bw() +
+  labs(title = 'KPMP SNARE-seq2',
+       subtitle = 'annotation level: subclass l1')
+dev.off()
