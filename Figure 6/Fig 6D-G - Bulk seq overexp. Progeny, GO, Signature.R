@@ -19,11 +19,11 @@ library(stringr)
 library(gprofiler2)
 
 windowsFonts("Arial" = windowsFont("Arial"))
-setwd("C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Überexpression/2021 ADAMTS12 Überexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4")
+setwd("C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Ãœberexpression/2021 ADAMTS12 Ãœberexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4")
 sample="ADAMTS12_OvExp_"
-ActvsKO<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Überexpression/2021 ADAMTS12 Überexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_WTvsKO.txt")
-ActvsInact<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Überexpression/2021 ADAMTS12 Überexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_WTvsInact.txt")
-InactvsKO<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Überexpression/2021 ADAMTS12 Überexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_InactvsKO.txt")
+ActvsKO<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Ãœberexpression/2021 ADAMTS12 Ãœberexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_WTvsKO.txt")
+ActvsInact<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Ãœberexpression/2021 ADAMTS12 Ãœberexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_WTvsInact.txt")
+InactvsKO<-read.delim(file="C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Ãœberexpression/2021 ADAMTS12 Ãœberexpression/Experiments/Bulk-Seq/Analysis/ExceptInactRep4/ADAMTS12_OvExp_00_DESEQ2_InactvsKO.txt")
 
 Comparisons <- list(WTvsKO, WTvsInact, InactvsKO)
 Comparisons.names <- c("ActvsKO", "ActvsInact", "InactvsKO")
@@ -123,7 +123,7 @@ ggsave(filename = paste0(sample, "05_Top5_GO_BP.svg"),  width=5.2, height = 3.7)
 
 # Fig 4m-n: Scoring of the different signatures in Fibroblast Reference Map from Peisker et al., Nat. com
 library(Seurat)
-sc <- readRDS(file = "C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Überexpression/2021 ADAMTS12 ?berexpression/Experiments/Bulk-Seq/Analysis/Fibroblast_integrated_filtered_processed_annotated.rds")
+sc <- readRDS(file = "C:/Users/Konra/Dropbox/Kramann Arbeitsgruppe/3. Adamts12/in vitro/ADAMTS12 Ãœberexpression/2021 ADAMTS12 ?berexpression/Experiments/Bulk-Seq/Analysis/Fibroblast_integrated_filtered_processed_annotated.rds")
 DimPlot(sc, group.by = "Annotated_Subsets", label = TRUE)
 ggsave(filename = paste0(sample,"06_PVM_Dimplot.jpeg"), width=10 , height = 10)
 
