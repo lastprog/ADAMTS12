@@ -100,7 +100,7 @@ spot_track <- transform(spot_track,
                                                     "WT", 
                                                     "Inact.")))
 
-########################## Fig. 4J - Trajectory Maps ###########################
+########################## Fig. 6C - Trajectory Maps ###########################
 
 ggplot(spot_track, aes(x = spot_track$zero_x, y = spot_track$zero_y, 
                        group = spot_track$n_id, color = spot_track$TRACK_MEAN_SPEED))+
@@ -134,7 +134,7 @@ ggplot(spot_track, aes(x = spot_track$zero_x, y = spot_track$zero_y,
   theme(strip.text.y = element_blank())
 ggsave(paste0("Output/Fig. 4J - Trajectory Maps.tiff"), width = 3.2, height = 1.1, units = "in", dpi = 1000)
 
-############################ Fig. 4J - Analysis ################################
+############################ Fig. 6C - Analysis ################################
 
 # Assign position well
 df_tracks$well <- paste(df_tracks$case, df_tracks$id)
