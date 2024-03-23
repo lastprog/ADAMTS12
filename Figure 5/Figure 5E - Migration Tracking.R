@@ -73,7 +73,7 @@ spot_track <- spot_track[order(spot_track$id, spot_track$POSITION_T),]
 spot_track <- transform(spot_track,
                         group=factor(group,levels=c("WT CT","WT TGFb","KO CT", "KO TGFb")))
 
-########################## Fig. 4E - Trajectory Maps ###########################
+########################## Fig. 5E - Trajectory Maps ###########################
 
 ggplot(spot_track, aes(x = spot_track$zero_x, y = spot_track$zero_y, 
                        group = spot_track$id, color = spot_track$TRACK_MEAN_SPEED))+
@@ -108,7 +108,7 @@ ggplot(spot_track, aes(x = spot_track$zero_x, y = spot_track$zero_y,
 
 ggsave(paste0("Output/Fig. 4E - Trajectory Maps.tiff"), width = 2.5, height = 2.1, units = "in", dpi = 1000)
 
-############################ Fig. 4E - Analysis ################################
+############################ Fig. 5E - Analysis ################################
 
 # Weight speed of each track by th captured spots in the track
 spot_track$spotsxspeed <- spot_track$NUMBER_SPOTS*spot_track$TRACK_MEAN_SPEED
@@ -121,7 +121,7 @@ Erg$average_speed_per_frame <- Erg$`sum(spotsxspeed)`/Erg$`sum(NUMBER_SPOTS)`
 
 writexl::write_xlsx(path = "Output/Fig. 4E - Analysis.xlsx", x = Erg)
 
-########################### Supp Video 2 - Paths ###############################
+########################### Supp. Video 2 - Paths ###############################
 
 spot_track$pow <- paste(str_split_fixed(spot_track$id, " ", 4)[,1], 
                         str_split_fixed(spot_track$id, " ", 4)[,2],
