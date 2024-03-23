@@ -26,7 +26,7 @@ meta <- data.frame(sample, design)
 colnames(meta) <- c("sample", "condition")
 outdir <- "Output/"
 
-###################### Ext. data Fig 4C - Quality Control ######################
+###################### Supp. Fig 7D - Quality Control ######################
 
 # Logarithmize
 dat_log <- dat
@@ -80,7 +80,7 @@ dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 dds <- nbinomWaldTest(dds)
 
-################### Ext. data Fig 4J - PCA with Inact 4#########################
+################### Supp. Fig. Fig 7E - PCA with Inact 4#########################
 
 vsd <- vst(dds, blind = FALSE)
 pcaData <- plotPCA(vsd, intgroup = c( "condition"), returnData = TRUE)
@@ -116,7 +116,7 @@ ggplot(pcaData, aes(x=PC1, y=PC2, color=condition)) +
         legend.position = "none")
 ggsave("Output/PCA_bulk_KO_WT_overexp.svg", height = 1.8, width = 2,units = "in")
 
-################# Ext. data Fig 4K - PCA without Inact 4 #######################
+################# Supp. Fig. 7F - PCA without Inact 4 #######################
 
 # Remove "Inact_Veh_REP4"
 dat <- select(dat, -Inact_Veh_REP4)
@@ -166,15 +166,4 @@ ggplot(pcaData, aes(x=PC1, y=PC2, color=condition)) +
                                    colour = "black"),
         legend.position = "none")
 ggsave("Output/PCA_bulk_KO_WT_overexp.svg", height = 1.8, width = 2,units = "in")
-
-
-
-
-
-
-
-
-
-
-
 
