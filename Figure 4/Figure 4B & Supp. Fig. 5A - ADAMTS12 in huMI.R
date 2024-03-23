@@ -19,7 +19,7 @@ zones <- c("Control", "Ischemic", "Border", "Remote", "Fibrotic")
 whole_data$sample_category <- mgsub(whole_data$sample_category, c("CTRL", "IZ", "BZ", "RZ", "FZ"), 
                                     zones)
 
-##################### Fig 3P - Spatial ADAMTS12 exp. in huMI ###################
+# Fig 3B - Spatial ADAMTS12 exp. in huMI
 
 # Aggregate samples (sum)
 adamts12_exp_by_ct <- aggregate(whole_data$ADAMTS12 ~ whole_data$sample_category + whole_data$cell_type_original, 
@@ -61,7 +61,7 @@ ggplot(adamts12_exp_by_ct, aes(x = factor(adamts12_exp_by_ct$`whole_data$sample_
 ggsave("Output/huMI ds ADAMTS12 Expression_sum.svg", height = 1.8, width = 2.3)
 
 
-################ Ext. Data Fig 3 - Cell type composition per zone ##############
+# Supplemental Figure 5A - Cell type composition per zone
 
 # Count cell type occurence
 ct_count <- list()
@@ -121,7 +121,7 @@ ggplot(cell_count_long, aes(x = factor(cell_count_long$sample, levels = zones),
         legend.key.height= unit(0.1, 'cm'))
 ggsave("Output/Ext data Fig 3L - cell type composition_huMI.svg", height = 2.4, width = 3)
 
-################### Fig 3P - Cell type composition pie charts ##################
+# Figure 4B - Cell type composition pie charts
 
 for(i in zones){
   tmp <- cell_count_long[cell_count_long$sample == i,]
