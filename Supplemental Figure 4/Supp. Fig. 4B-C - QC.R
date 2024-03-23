@@ -33,8 +33,7 @@ df_long$sample <- factor(df_long$sample, levels = c("Adamts12-/- #2", "Adamts12-
 df_long$group <- str_split_fixed(df_long$sample, " ", 2)[,1]
 df_long$value <- as.numeric(df_long$value)
 
-################### Ext. Data Fig 3B - Total Detected Genes ###################
-
+# Supplemental Figure 4B - Total Detected Genes
 to_ge_det <- df_long[df_long$rownames == "Total.Genes.Detected",]
 p1 <- ggplot(to_ge_det, aes(x = to_ge_det$sample, y = to_ge_det$value/1000, fill = to_ge_det$group))+
   geom_bar(stat = "identity")+
@@ -50,8 +49,7 @@ p1 <- ggplot(to_ge_det, aes(x = to_ge_det$sample, y = to_ge_det$value/1000, fill
         legend.position = "none")+
   coord_flip()
 
-######################## Ext. Data Fig 3C - Valid UMIs ########################
-
+# Supplemental Figure 4C - Valid UMIs
 val_umis <- df_long[df_long$rownames == "Valid.UMIs",]
 p2 <- ggplot(val_umis, aes(x = val_umis$sample, y = val_umis$value*100, fill = val_umis$group))+
   geom_bar(stat = "identity")+
