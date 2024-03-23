@@ -111,7 +111,7 @@ volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = N
   return(a)
 }
 
-######################### Ext data Fig 4l - Act vs KO ##########################
+######################### Supp. Fig. 7G - Act vs KO ##########################
 
 txt <- "WTvsKO"
 
@@ -146,7 +146,7 @@ volcano_nice(df = deg, hAss = 0.05, FCIndex = 3,pValIndex = 6, vAss = 0.3,
         panel.grid.minor = element_line(colour = "grey", size = 0.05))
 ggsave(filename = paste0("Output/Ext data Fig 4 l_",txt,".svg"), width = 2, height = 2)
 
-######################## Ext data Fig 4l - Act vs Inact ########################
+######################## Supp. Fig. 7H - Act vs Inact ########################
 
 txt <- "WTvsInact"
 
@@ -181,7 +181,7 @@ volcano_nice(df = deg, hAss = 0.05, FCIndex = 3,pValIndex = 6, vAss = 0.3,
         panel.grid.minor = element_line(colour = "grey", size = 0.05))
 ggsave(filename = paste0("Output/Ext data Fig 4 l_",txt,".svg"), width = 2, height = 2)
 
-######################## Ext data Fig 4l - Act vs Inact ########################
+######################## Supp. Fig. 7I - Inact vs KO ########################
 
 txt <- "InactvsKO"
 
