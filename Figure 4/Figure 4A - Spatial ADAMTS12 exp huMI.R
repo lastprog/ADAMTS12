@@ -14,6 +14,7 @@ setwd("xxx") # Set your working directory here
 samples <- list.files("Input/",pattern = "*.rds",recursive = TRUE, full.names = TRUE)
 n <- c("control", "fibrotic", "ischemic", "border", "remote")
 
+# Figure 4B 
 # Read human MI dataset and plot SpatialDimPlot 
 for(i in 1:length(samples)){
   # Load dataset
