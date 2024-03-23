@@ -23,6 +23,7 @@ write.csv(df, "Output/Supp. table 4 - DEP mass spectrometry.csv")
 ## Top 10 up and down
 top10 <- rbind(head(df, 10), tail(df,10))
 
+# Figure 7A
 ggplot(top10, aes(x = reorder(top10$Genes, -top10$Diff_KO_vs_WT),
                   y = top10$Diff_KO_vs_WT)) + 
   geom_bar(stat = "identity", aes(fill =top10$Diff_KO_vs_WT))+
