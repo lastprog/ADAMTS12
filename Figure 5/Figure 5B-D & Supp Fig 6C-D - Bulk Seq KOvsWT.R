@@ -35,7 +35,7 @@ meta <- data.frame(sample, design)
 colnames(meta) <- c("sample", "condition")
 outdir = "DESeq2/"
 
-###################### Ext. data Fig 4C - Quality control ######################
+# Supp. Fig. 4C - Quality control
 
 # Logarithmize
 dat_log <- dat
@@ -84,7 +84,7 @@ dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 dds <- nbinomWaldTest(dds)
 
-######################## Ext data Fig 4D - PCA ################################
+# Supp. Fig. 6D - PCA
 
 vsd <- vst(dds, blind = FALSE)
 pcaData <- plotPCA(vsd, intgroup = c( "condition"), returnData = TRUE)
@@ -164,7 +164,7 @@ deg <- deg[order(deg$t, decreasing = F),]
 
 write.csv(deg, file=paste0(outdir, folders,"Supp. table 3 - DEGs Bulk Seq KOvsWT.csv"), row.names = F)
 
-############################ Fig 4B - Vulcano Plot #############################
+# Figure 5B - Vulcano Plot
 
 # Volcano Plot with labeling the top 10 up- and downregulated genes ranked by T-Value
 top10 <- deg %>% top_n(n = 10, wt = t) %>% pull(`gene_name`)
@@ -197,7 +197,7 @@ volcano_nice(df = deg, hAss = 0.05, FCIndex = 3,pValIndex = 7,
         panel.grid.minor = element_line(colour = "grey", size = 0.05))
 ggsave(filename = paste0(outdir,"Fig  4B - Vulcano.svg"), width = 2.4, height =2, units = "in", dpi = 1000)
 
-############################### Fig 4C - Progeny ##############################
+# Figure 4C - Progeny
 
 # Prepare data matrix
 df_matrix <- deg %>% 
@@ -238,7 +238,7 @@ ggplot(PathwayActivity_zscore_df,aes(x = reorder(Pathway, -NES), y = NES)) +
   coord_flip()
 ggsave(filename = paste0(outdir, "/Fig 4C - Progeny.svg"),  width = 1.2, height = 2.1, units = "in")
 
-########################### Fig 4D - GO:BP Terms ##############################
+# Fig 4D - GO:BP Terms
 
 top100_down <- head(deg, 500)[,"gene_name"]
 
