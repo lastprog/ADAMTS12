@@ -56,7 +56,7 @@ images <- names(sam_split[["KO.1"]]@images)
 
 ###############################################################################
 
-################# Ext. Data Fig 3E - Dotplot Marker Genes ######################
+# Supplemental Figure 4E - Dotplot Marker Genes
 # Find Marker Genes
 marker_genes <- FindAllMarkers(data)
 
@@ -84,7 +84,7 @@ DotPlot(data, features = top5, dot.scale = 3)+
         legend.position = "bottom")
 ggsave("Output/Ext. data Fig 3D - Dotplot Markergenes per cluster_on_logFC.svg", width = 4, height = 2)
 
-################### Ext. data Fig 3F - cell type annotation ###################
+# Supplemental Figure 3F - Cell type annotation 
 
 for(i in seq(1, length(images), 1)){
   sam <- samples[i]
@@ -130,7 +130,7 @@ SpatialDimPlot(sam_split[["KO.1"]], label = FALSE, images = images[1])+
                "Lymphoid" ="#FF63B6"))
 ggsave(filename = "Output/Ext. data Fig 3 - celltypes_legend.svg")
 
-######################## Fig 3C - Spatial niches ###############################
+# Figure 3C - Spatial niches 
 for(i in seq(1, length(images), 1)){
   sam <- samples[i]
   img <- images[i]
@@ -164,7 +164,7 @@ SpatialDimPlot(sam_split[[1]], label = FALSE)+
         legend.key.height= unit(0.1, 'cm'))
 ggsave(filename = "Output/Fig 3C - spatial niches_legend.svg")
 
-################### Fig 3 D - Spatial ADAMTS12 expression ######################
+# Figure 3D - Spatial ADAMTS12 expression 
 
 for(i in seq(1,length(images), 1)){
   sam <- samples[i]
@@ -178,7 +178,7 @@ for(i in seq(1,length(images), 1)){
   ggsave(filename = paste0("Output/Fig 3D - ADAMTS12_exp_",sam,".svg"))
 }
 
-################# Fig 3 E - Stacked barplot of spatial ADAMTS12 ################
+# Figure 3E - Stacked barplot of spatial ADAMTS12 
 
 # Extract only WT samples
 wt_comb <- merge(sam_split[["WT.1"]], sam_split[["WT.2"]])
@@ -230,7 +230,7 @@ ggplot(adamts12_wt, aes(x = adamts12_wt$`adamts12_wt$cluster`,
         legend.key.height= unit(0.1, 'cm'))
 ggsave("Output/Fig. 3E stacked barplot_ADAMTS12 Expression_sum.svg", height = 1.3, width = 2.9)
 
-############## Fig. 3F & Ext. data Fig 3G - cell type composition ##############
+# Figure 3F & Supp. Fig. 4G - cell type composition 
 
 # Celltypes and samples in the dataset
 samples <- names(sam_split)
@@ -272,7 +272,7 @@ for(z in zones){
   zones_prob[[z]] <- t(tmp[,-c(12, 13)])
 }
 
-########################### Fig 3F - log2fc of IZ ##############################
+# Figure 3F - log2fc of IZ
 
 zone_df <- as.data.frame(zones_prob[["IZ"]])
 means_geno <- data.frame(KO = (zone_df$KO.1+zone_df$KO.2)/2,
@@ -309,7 +309,7 @@ ggplot(means_geno,aes(x = reorder(means_geno$rowname, means_geno$log2fc), y =mea
 ggsave(filename = "Output/Fig 3F - celltypes_log2fc_barplot.svg", width = 1.5, height = 2.1, units = "in")
 
 
-################# Ext. Data Fig 3G - cell type composition by zone ##############
+# Supp. Fig. 4G - cell type composition by zone
 
 p <- list()
 for(z in zones){
@@ -353,7 +353,7 @@ ggarrange(p[["IZ"]], p[["BZ"]],p[["RBZ"]],  p[["HM #1"]], p[["HM #2"]], p[["Epi"
           common.legend = T, legend = "right")
 ggsave("Output/Ext. data Fig 3G - Cell_composition different zones.svg",  height = 2.5, width = 3.5)
 
-############## Ext. Data Fig 3G - cell type composition all niches ############# 
+# Supp. Fig. 3G - Cell type composition all niches 
 means <- list()
 for(g in samples){
   ls <- list()
@@ -418,10 +418,10 @@ iz_only <- data[,data@meta.data[["concat_leiden_0.5"]] == "IZ"]
 # Calculate DEGs
 degs_iz <- FindAllMarkers(iz_only, only.pos = T, min.pct = 0.25, logfc.threshold = 0.0, test.use = "MAST")
 
-######################### Supp table 2 - DEGs of IZ ############################
+# Supplemental table 3 - Visium DEGs IZ
 write.csv(degs_iz,"Output/Supp. table 2 - Visium DEGs IZ.csv")
 
-###################### Fig 3G - Vulcano Plot of DEGs in IZ #####################
+# Figure 3G - Vulcano Plot of DEGs in IZ
 degs_iz <- read.csv("Output/DEGs IZ.csv")
 degs_iz$avg_log2FC <- ifelse(degs_iz$cluster == "WT", degs_iz$avg_log2FC*-1, degs_iz$avg_log2FC)
 
@@ -463,7 +463,7 @@ ko_up <- gost(query = ko_deg$gene,
               numeric_ns = "", sources = NULL, as_short_link = FALSE) 
 res_up <- ko_up$result
 
-######################### Fig 3H - Reactome Terms #############################
+# Figure 3H - Reactome Terms
 
 # Select only Reactome Terms with termsize > 10
 go_reac_up <- res_up[res_up$source == "REAC" & res_up$term_size > 10, ]
@@ -505,7 +505,7 @@ ggplot(top10_up,
   coord_flip()
 ggsave(filename = "Output/Fig 3H - Reactome_Terms_barplot.svg", width = 1.8, height = 2, units = "in")
 
-####################### Ext. data. Fig 3H - GO:BP Terms ########################
+# Supplemental Fig 4H - GO:BP Terms
 
 # Select only GO:BP Terms with term size <2000
 go_bp_up <- res_up[res_up$source == "GO:BP" & res_up$term_size < 2000, ]
@@ -559,7 +559,7 @@ ggplot(top10_up,
   coord_flip()
 ggsave(filename = "Output/Ext Fig 3H - Top10_GO_BP-Terms_barplot.svg", width = 2, height = 2.3, units = "in")
 
-########################## Fig. 3I - Progeny IZ ###############################
+# Figure 3I - Progeny IZ
 
 # Capitalize gene names
 first_letters <- toupper(substr(degs_iz$gene, 1, 1))
@@ -611,7 +611,7 @@ ggplot(PathwayActivity_zscore_df,aes(x = reorder(Pathway, -NES), y = NES)) +
   coord_flip()
 ggsave(filename = "Output/Fig 3I - Visium ischemic zone Progeny.svg",  width = 1.6, height = 2.2)
 
-####################### Ext data Fig. 3H - Dorothea IZ #########################
+# Supp. Fig. 4H - Dorothea IZ 
 
 # Prepare Dataframe - only use regulons of confidence A-C
 data(dorothea_mm, package="dorothea")
