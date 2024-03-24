@@ -123,8 +123,8 @@ volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = N
 # Proteomic
 # Format Table
 df2<-df[-c(1,2), ]
-df2 <- df2[c("Gene.names","Student.s.T.test.Difference.ko_wt","X.Log.Student.s.T.test.p.value.ko_wt", "Student.s.T.test.q.value.ko_wt")]
-write.csv(df2, paste0(sample, "01_SuppTable.csv"))
+df2 <- df2[c("Gene.names", "Protein.IDs","Student.s.T.test.Difference.ko_wt","X.Log.Student.s.T.test.p.value.ko_wt", "Student.s.T.test.q.value.ko_wt")]
+write_xlsx(df2, paste0(sample, "01_SuppTable.xlsx"))
 
 # For plotting
 volcano_nice(df = df2, hAss = 0.05, FCIndex = 2,pValIndex = 4, vAss = 0.3,
